@@ -1,5 +1,8 @@
 package fr.utbm.endpoints;
 
+import java.util.List;
+
+import fr.utbm.entities.Movie;
 import fr.utbm.repositories.MovieRepository;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -14,8 +17,8 @@ public class MovieEndpoint {
     MovieRepository movieRepository;
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getMovies() {
-        return movieRepository.listAll().toString();
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Movie> getMovies() {
+        return movieRepository.listAll();
     }
 }
