@@ -16,21 +16,13 @@ public class Movie extends PanacheEntity {
     public Integer copies;
 
     @Column(name = "MOVIE_TYPE", length = 20, nullable = false)
-    public String movieType;   // On garde une chaîne pour rester simple.
+    public String movieType;
 
-    /* --- Relations --- */
-
-    /** Acteur principal (FK MAIN_ACTOR_ID) */
     @ManyToOne
     @JoinColumn(name = "MAIN_ACTOR_ID")
     public Actor mainActor;
 
-    /** Acteurs secondaires via la table VIDEO.MOVIE_SEC_ACTORS */
     @ManyToMany
-    @JoinTable(
-        name = "MOVIE_SEC_ACTORS",
-        joinColumns        = @JoinColumn(name = "ID_MOVIE"),
-        inverseJoinColumns = @JoinColumn(name = "ID_ACTOR")
-    )
+    @JoinTable(name = "MOVIE_SEC_ACTORS", joinColumns = @JoinColumn(name = "ID_MOVIE"), inverseJoinColumns = @JoinColumn(name = "ID_ACTOR"))
     public Set<Actor> secondaryActors = new HashSet<>();
 }

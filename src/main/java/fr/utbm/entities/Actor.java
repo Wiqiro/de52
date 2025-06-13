@@ -4,6 +4,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "ACTOR")
 public class Actor extends PanacheEntity {
@@ -14,11 +16,11 @@ public class Actor extends PanacheEntity {
     @Column(name = "FIRSTNAME", length = 20)
     public String firstname;
 
-    /** Films où cet acteur joue le rôle principal */
+    @JsonIgnore
     @OneToMany(mappedBy = "mainActor")
     public List<Movie> mainMovies;
 
-    /** Films où cet acteur est “second rôle” */
+    @JsonIgnore
     @ManyToMany(mappedBy = "secondaryActors")
     public List<Movie> moviesAsSecondary;
 }
